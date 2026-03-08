@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女娲娘娘线上祭祀殿</title>
+    <style>
+        /* 整体样式，古风设计 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f0e8;
+            background-image: url('https://picsum.photos/id/1040/1920/1080'); /* 免费古风背景图 */
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: "SimSun", serif;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        .title {
+            text-align: center;
+            font-size: 36px;
+            color: #8B4513;
+            margin: 20px 0;
+        }
+        .nvwang-img {
+            display: block;
+            width: 300px;
+            height: auto;
+            margin: 0 auto;
+            border-radius: 8px;
+            border: 2px solid #8B4513;
+        }
+        .pray-area {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #A0522D;
+        }
+        .message-area {
+            margin: 30px 0;
+            text-align: center;
+        }
+        #prayInput {
+            width: 80%;
+            height: 100px;
+            padding: 10px;
+            border: 2px solid #8B4513;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+        }
+        .message-list {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .message-item {
+            padding: 8px;
+            border-bottom: 1px dashed #ddd;
+            margin-bottom: 5px;
+        }
+        .tip {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">女娲娘娘祭祀殿</h1>
+        <!-- 最终修改后的图片代码（直接替换你原来的这行即可） -->
+<img src="images/1.jpg" alt="女娲娘娘" class="statue" style="width: 300px; height: auto; display: block; margin: 0 auto 20px;">
+        
+        <div class="pray-area">
+            <h2>恭拜女娲娘娘</h2>
+            <button class="btn" id="incenseBtn">上香</button>
+            <button class="btn" id="flowerBtn">献花</button>
+            <button class="btn" id="kowtowBtn">叩拜</button>
+            <div id="actionTip" style="margin-top: 15px; color: #8B4513; font-size: 18px;"></div>
+        </div>
+
+        <div class="message-area">
+            <h2>祈福留言</h2>
+            <textarea id="prayInput" placeholder="请写下您对女娲娘娘的祈福话语..."></textarea>
+            <br>
+            <button class="btn" id="submitBtn">提交祈福</button>
+            <div class="message-list" id="messageList"></div>
+        </div>
+
+        <div class="tip">
+            本页面为公益线上祭祀，无任何商业用途，愿女娲娘娘护佑众生🙏
+            此图片取自于网络,如果涉及版权，请联系我们:1345908936@qq.com。
+        </div>
+    </div>
+
+    <script>
+        // 核心交互逻辑
+        const incenseBtn = document.getElementById('incenseBtn');
+        const flowerBtn = document.getElementById('flowerBtn');
+        const kowtowBtn = document.getElementById('kowtowBtn');
+        const actionTip = document.getElementById('actionTip');
+        const submitBtn = document.getElementById('submitBtn');
+        const prayInput = document.getElementById('prayInput');
+        const messageList = document.getElementById('messageList');
+
+        // 上香/献花/叩拜交互
+        incenseBtn.addEventListener('click', () => {
+            actionTip.textContent = '🙏 一柱清香，敬奉女娲娘娘，愿所求皆所愿 🙏';
+            setTimeout(() => {
+                actionTip.textContent = '';
+            }, 300000);
+        });
+
+        flowerBtn.addEventListener('click', () => {
+            actionTip.textContent = '🌸 献上鲜花，感恩女娲娘娘庇佑 🌸';
+            setTimeout(() => {
+                actionTip.textContent = '';
+            }, 300000);
+        });
+
+        kowtowBtn.addEventListener('click', () => {
+            actionTip.textContent = '🙇 虔诚叩拜，祈愿平安顺遂 🙇';
+            setTimeout(() => {
+                actionTip.textContent = '';
+            }, 300000);
+        });
+
+        // 祈福留言（本地存储，仅自己可见，零服务器成本）
+        submitBtn.addEventListener('click', () => {
+            const prayText = prayInput.value.trim();
+            if (!prayText) {
+                alert('请写下您的祈福话语~');
+                return;
+            }
+            // 创建留言项
+            const date = new Date();
+            const timeStr = `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,0)}-${date.getDate().toString().padStart(2,0)} ${date.getHours().toString().padStart(2,0)}:${date.getMinutes().toString().padStart(2,0)}`;
+            const messageItem = document.createElement('div');
+            messageItem.className = 'message-item';
+            messageItem.innerHTML = `<strong>${timeStr}</strong>：${prayText}`;
+            messageList.prepend(messageItem);
+
+            // 保存到本地（仅当前浏览器可见）
+            let messages = JSON.parse(localStorage.getItem('nvwang_pray_messages') || '[]');
+            messages.unshift({ time: timeStr, content: prayText });
+            localStorage.setItem('nvwang_pray_messages', JSON.stringify(messages));
+
+            // 清空输入框
+            prayInput.value = '';
+        });
+
+        // 加载本地保存的留言
+        window.onload = () => {
+            let messages = JSON.parse(localStorage.getItem('nvwang_pray_messages') || '[]');
+            messages.forEach(item => {
+                const messageItem = document.createElement('div');
+                messageItem.className = 'message-item';
+                messageItem.innerHTML = `<strong>${item.time}</strong>：${item.content}`;
+                messageList.appendChild(messageItem);
+            });
+        };
+    </script>
+</body>
+</html>
